@@ -1,6 +1,6 @@
 require "rspec"
 
-Rspec.describe MainMenu do
+RSpec.describe MainMenu do
   describe "#open_main_menu" do
     xit "prints a welcome message and menu using a playerIO manager" do
       welcome_message = "Welcome to hangman"
