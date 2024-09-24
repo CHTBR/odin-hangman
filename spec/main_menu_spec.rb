@@ -2,11 +2,12 @@ require "rspec"
 require_relative "../lib/main_menu"
 
 RSpec.describe MainMenu do
+  let(:subject) { MainMenu.new({ player_io: @player_io, game_manager: @game_manager, load_manager: @load_manager }) }
+
   before do
-    @player_io = double("PlayerIO", :print, :get_option)
-    @game_manager = double("GameManager", :start_new_game)
-    @load_manager = double("LoadManager", :load_game)
-    let(:subject) { MainMenu.new({ player_io: @player_io, game_manager: @game_manager, load_manager: @load_manager }) }
+    @player_io = double("PlayerIO", print: nil, get_option: nil)
+    @game_manager = double("GameManager", start_new_game: nil)
+    @load_manager = double("LoadManager", load_game: nil)
   end
 
   describe "#open_main_menu" do
