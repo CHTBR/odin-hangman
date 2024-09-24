@@ -17,7 +17,7 @@ RSpec.describe MainMenu do
       subject.open_main_menu
     end
 
-    xit "prints a list of available options and asks the player to choose one using playerIO manager" do
+    it "prints a list of available options and asks the player to choose one using playerIO manager" do
       message = "What would you like to do?"
       options = ["Help", "Start a new game", "Load from save"]
       expect(@player_io).to receive(:get_option).with({ message: message, options: options })

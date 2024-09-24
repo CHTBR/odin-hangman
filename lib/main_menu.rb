@@ -6,5 +6,7 @@ class MainMenu
 
   def open_main_menu
     @player_io.print("Welcome to hangman")
+    @player_io.get_option({ message: "What would you like to do?",
+                            options: ["Help", "Start a new game", "Load from save"] })
   end
 end
