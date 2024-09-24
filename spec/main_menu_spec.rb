@@ -14,5 +14,16 @@ Rspec.describe MainMenu do
       expect(@player_io).to_receive(:get_option).with({ message: message, options: options })
       subject.open_main_menu
     end
+
+    context "after getting input from the player" do
+      context "if they want to get help" do
+        xit "lists the rules of the game hangman and how the save/load function works" do
+          rules = "example string"
+          allow(@player_io).to_receive(:get_option).and_return("Help")
+          expect(@player_io).to_receive(:print).with(rules)
+          subject.open_main_menu
+        end
+      end
+    end
   end
 end
