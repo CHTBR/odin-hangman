@@ -26,7 +26,7 @@ RSpec.describe MainMenu do
 
     context "after getting input from the player" do
       context "if they want to get help" do
-        xit "lists the rules of the game hangman and how the save/load function works" do
+        it "lists the rules of the game hangman and how the save/load function works" do
           rules = "example string"
           allow(@player_io).to receive(:get_option).and_return("Help")
           expect(@player_io).to receive(:print).with(rules)
