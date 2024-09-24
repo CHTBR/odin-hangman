@@ -3,6 +3,7 @@ class MainMenu
   def initialize(args)
     @player_io = args[:player_io]
     @game_manager = args[:game_manager]
+    @load_manager = args[:load_manager]
   end
 
   def open_main_menu
@@ -15,6 +16,8 @@ class MainMenu
       @player_io.print("example string")
     when "Start a new game"
       @game_manager.start_new_game
+    when "Load from save"
+      @load_manager.load_game
     end
   end
 end
