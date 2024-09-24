@@ -35,7 +35,7 @@ RSpec.describe MainMenu do
       end
 
       context "if they want to start a new game" do
-        xit "sends a start_new_game message to the game_manager" do
+        it "sends a start_new_game message to the game_manager" do
           allow(@player_io).to receive(:get_option).and_return("Start a new game")
           expect(@game_manager).to receive(:start_new_game)
           subject.open_main_menu
