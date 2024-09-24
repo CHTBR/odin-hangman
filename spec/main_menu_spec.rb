@@ -1,4 +1,5 @@
 require "rspec"
+require_relative "../lib/main_menu"
 
 RSpec.describe MainMenu do
   before do
