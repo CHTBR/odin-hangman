@@ -1,6 +1,13 @@
 require "rspec"
 
 RSpec.describe MainMenu do
+  before do
+    @player_io = double("PlayerIO", :print, :get_option)
+    @game_manager = double("GameManager", :start_new_game)
+    @load_manager = double("LoadManager", :load_game)
+    let(:subject) { MainMenu.new({ player_io: @player_io, game_manager: @game_manager, load_manager: @load_manager }) }
+  end
+
   describe "#open_main_menu" do
     xit "prints a welcome message and menu using a playerIO manager" do
       welcome_message = "Welcome to hangman"
