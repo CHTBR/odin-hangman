@@ -14,7 +14,10 @@ end
 
 RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
   describe "#start_new_game" do # rubocop:disable Metrics/BlockLength
-    let(:subject) { GameManager.new({ player_io: @player_io, file_reader: @file_reader, guess_evaluator: @guess_evaluator, save_manager: @save_manager }) }
+    let(:subject) do
+      GameManager.new({ player_io: @player_io, file_reader: @file_reader, guess_evaluator: @guess_evaluator,
+                        save_manager: @save_manager })
+    end
     before do
       @player_io = double("PlayerIO", print: nil, get_option: nil, set_global_option: nil)
       @file_reader = double("FileReader", list_of_words: [""])
@@ -177,10 +180,12 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
   end
 
   describe "#to_json" do
-
+    it "returns the representation of it's core variables in json" do
+      game_manager = GameManagerDouble.new
+      expect(game_manager.to_json).to eql("{\"target\":\"target\",\"guess_target\":[\"t\",\"_\",\"r\",\"_\",\"_\",\"t\"],\"num_of_wrong_guesses\":1,\"num_of_correct_guesses\":3,\"guess_options\":[\"a\",\"b\",\"c\",\"d\",\"e\",\"f\",\"g\",\"h\",\"i\",\"j\",\"k\",\"l\",\"m\",\"n\",\"p\",\"q\",\"s\",\"u\",\"v\",\"w\",\"x\",\"y\",\"z\"]}")
+    end
   end
 
   describe "#parse_json" do
-
   end
 end
