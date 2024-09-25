@@ -12,7 +12,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
     end
 
     context "before initializing the game loop" do
-      xit "tries to get a list of possible words from the file reader" do
+      it "tries to get a list of possible words from the file reader" do
         expect(@file_reader).to receive(:list_of_words)
         subject.start_new_game
       end
