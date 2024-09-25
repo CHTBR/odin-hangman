@@ -28,5 +28,25 @@ RSpec.describe GameManager do
         expect(target1).to_not eql(target2)
       end
     end
+
+    context "during a game where the player only guesses wrong" do
+
+    end
+
+    context "during a game where the player only guesses right" do
+
+    end
+
+    context "during a 6 round game" do
+
+    end
+
+    context "during a game where the player saves in the 3rd round" do
+
+    end
+
+    context "during any game" do
+
+    end
   end
 end
