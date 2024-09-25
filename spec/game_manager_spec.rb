@@ -1,6 +1,17 @@
 require "rspec"
 require_relative "../lib/game_manager"
 
+# role class for converting to json
+class GameManagerDouble < GameManager
+  def initialize
+    @target = "target"
+    @guess_target = %w[t _ r _ _ t]
+    @num_of_wrong_guesses = 1
+    @num_of_correct_guesses = 3
+    @guess_options = %w[a b c d e f g h i j k l m n p q s u v w x y z]
+  end
+end
+
 RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
   describe "#start_new_game" do # rubocop:disable Metrics/BlockLength
     let(:subject) { GameManager.new({ player_io: @player_io, file_reader: @file_reader, guess_evaluator: @guess_evaluator, save_manager: @save_manager }) }
