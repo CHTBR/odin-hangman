@@ -125,7 +125,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
         subject.start_new_game
       end
 
-      xit "sends a message to the player congratulating them on winning" do
+      it "sends a message to the player congratulating them on winning" do
         congrats_message = "Congratulations, you won!"
         expect(@player_io).to receive(:print).with(congrats_message)
         subject.start_new_game

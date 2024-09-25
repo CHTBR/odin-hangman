@@ -36,7 +36,12 @@ class GameManager
       end
       @player_io.print(@guess_target.join(" "))
     end
-    @player_io.print("Regretably, you didn't manage to win.")
+
+    if _lost?
+      @player_io.print("Regretably, you didn't manage to win.")
+    else
+      @player_io.print("Congratulations, you won!")
+    end
   end
 
   def _lost?
