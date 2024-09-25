@@ -68,6 +68,11 @@ RSpec.describe GameManager do
         subject.start_new_game
         expect(@player_io).to have_received(:get_option).exactly(4).times
       end
+
+      xit "asks to evaluate player guess exactly 4 times" do
+        subject.start_new_game
+        expect(@guess_evaluator).to have_recieved(:evaluate_guess).exactly(4).times
+      end
     end
 
     context "during a 6 round game" do
