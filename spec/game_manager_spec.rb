@@ -15,6 +15,18 @@ RSpec.describe GameManager do
         expect(@guess_evaluator).to receive(:target=)
         subject.start_new_game
       end
+
+      xit "selects a different word from the list each time" do
+        word_list = %w[this is a list of random words]
+        allow(@file_reader).to receive(:list_of_words).and_return(word_list)
+
+        subject.start_new_game
+        target1 = @guess_evaluator.target
+        subject.start_new_game
+        target2 = @guess_evaluator.target
+
+        expect(target1).to_not eql(target2)
+      end
     end
   end
 end
