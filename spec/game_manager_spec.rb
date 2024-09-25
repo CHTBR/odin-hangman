@@ -52,7 +52,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
 
       before do
         allow(@file_reader).to receive(:list_of_words).and_return(["word"])
-        allow(@player_io).to receive(:get_option).and_return(%w[a b c e f g h i j k])
+        allow(@player_io).to receive(:get_option).and_return("a", "b", "c", "e", "f", "g", "h", "i", "j", "k")
         allow(@guess_evaluator).to receive(:evaluate_guess).and_return(-1)
       end
 
