@@ -19,6 +19,7 @@ class GameManager
       guess = @player_io.get_option({ message: "Choose a letter:",
                                       options: guess_options })
       guess_options -= [guess]
+      @guess_evaluator.evaluate_guess(guess)
     end
   end
 end
