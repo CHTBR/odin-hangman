@@ -24,18 +24,6 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
         subject.start_new_game
       end
 
-      xit "selects a different word from the list each time" do
-        word_list = %w[this is a list of random words]
-        allow(@file_reader).to receive(:list_of_words).and_return(word_list)
-
-        subject.start_new_game
-        target1 = @guess_evaluator.target
-        subject.start_new_game
-        target2 = @guess_evaluator.target
-
-        expect(target1).to_not eql(target2)
-      end
-
       xit "sets \"save\" as a global option for player io" do
         expect(@player_io).to receive(:set_global_option).with("save")
         subject.start_new_game
