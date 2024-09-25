@@ -2,9 +2,11 @@
 class GameManager
   def initialize(args)
     @file_reader = args[:file_reader]
+    @guess_evaluator = args[:guess_evaluator]
   end
 
   def start_new_game
-    @file_reader.list_of_words
+    list_of_words = @file_reader.list_of_words
+    @guess_evaluator.target = list_of_words[0]
   end
 end
