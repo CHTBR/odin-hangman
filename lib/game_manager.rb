@@ -27,12 +27,13 @@ class GameManager
 
       if evaluation == -1
         @num_of_wrong_guesses += 1
+        @player_io.print("Sadly, your guess was incorrect. Try again.")
+        @player_io.print("You have #{10 - @num_of_wrong_guesses} guesses left")
       else
         @num_of_correct_guesses += evaluation.size
+        @player_io.print("Yay, you guessed correctly.")
       end
 
-      @player_io.print("Sadly, your guess was incorrect. Try again.")
-      @player_io.print("You have #{10 - @num_of_wrong_guesses} guesses left")
     end
     @player_io.print("Regretably, you didn't manage to win.")
   end
