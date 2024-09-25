@@ -58,11 +58,11 @@ RSpec.describe PlayerIO do
     end
   end
 
-  describe "#set_global_option" do
-    xit "allows you to select the given option in any #get_option call" do
+  describe "#add_global_option" do
+    it "allows you to select the given option in any #get_option call" do
       player_io = subject
-      player_io.set_global_option("bonus")
-      $stdin = StringIO.new("bonus")
+      player_io.add_global_option("bonus")
+      allow_any_instance_of(Kernel).to receive(:gets).and_return("bonus")
       expect(player_io.get_option({ message: "Example message",
                                     options: %w[example options] })).to eql("bonus")
     end
