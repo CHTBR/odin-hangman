@@ -81,7 +81,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
         subject.start_new_game
       end
 
-      xit "sends a message to the player saying they lost" do
+      it "sends a message to the player saying they lost" do
         losing_message = "Regretably, you didn't manage to win."
         expect(@player_io).to receive(:print).with(losing_message)
         subject.start_new_game

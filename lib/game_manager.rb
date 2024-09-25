@@ -23,5 +23,6 @@ class GameManager
       @player_io.print("Sadly, your guess was incorrect. Try again.")
       @player_io.print("You have #{9 - num} guesses left")
     end
+    @player_io.print("Regretably, you didn't manage to win.")
   end
 end
