@@ -73,8 +73,8 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
       end
 
       it "sends a message to the player stating how many guesses they have left" do
-        max_number_of_wrong_guesses = 10
-        guesses_left_message = ["You have  ", " guesses left"]
+        max_number_of_wrong_guesses = 9 # -1 to max number
+        guesses_left_message = ["You have ", " guesses left"]
         number_of_guesses.times do |num|
           expect(@player_io).to receive(:print).with(guesses_left_message[0] + (max_number_of_wrong_guesses - num).to_s + guesses_left_message[1])
         end
