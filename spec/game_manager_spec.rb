@@ -96,7 +96,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
       before do
         allow(@file_reader).to receive(:list_of_words).and_return(["word"])
         allow(@player_io).to receive(:get_option).and_return(guesses_array)
-        allow(@guess_evaluator).to receive(:evaluate_guess).and_return([1, 2, 3, 4])
+        allow(@guess_evaluator).to receive(:evaluate_guess).and_return([1], [2], [3], [4])
       end
 
       it "requests input from the player exactly 4 times" do
