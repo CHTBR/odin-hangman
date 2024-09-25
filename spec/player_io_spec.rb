@@ -55,5 +55,12 @@ RSpec.describe PlayerIO do
   end
 
   describe "#set_global_option" do
+    it "allows you to select the given option in any #get_option call" do
+      player_io = subject
+      player_io.set_global_option("bonus")
+      $stdin = StringIO.new("bonus")
+      expect(player_io.get_option({ message: "Example message",
+                                    options: %w[example options] })).to eql("bonus")
+    end
   end
 end
