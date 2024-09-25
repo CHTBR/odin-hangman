@@ -13,16 +13,16 @@ class GameManager
     @player_io.set_global_option("save")
     @num_of_wrong_guesses = 0
     @num_of_correct_guesses = 0
+    @guess_options = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
     _game_loop
   end
 
   def _game_loop
-    guess_options = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
 
     until _lost? || _won?
       guess = @player_io.get_option({ message: "Choose a letter:",
-                                      options: guess_options })
-      guess_options -= [guess]
+                                      options: @guess_options })
+      @guess_options -= [guess]
       evaluation = @guess_evaluator.evaluate_guess(guess)
 
       if evaluation == -1
@@ -33,7 +33,6 @@ class GameManager
         @num_of_correct_guesses += evaluation.size
         @player_io.print("Yay, you guessed correctly.")
       end
-
     end
     @player_io.print("Regretably, you didn't manage to win.")
   end
