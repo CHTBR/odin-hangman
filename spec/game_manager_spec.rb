@@ -39,6 +39,10 @@ RSpec.describe GameManager do
         expect(@player_io).to have_received(:get_option).exactly(10).times
       end
 
+      xit "asks to evaluate player guess exactly 10 times" do
+        subject.start_new_game
+      expect(@guess_evaluator).to have_recieved(:evaluate_guess).exactly(10).times
+      end
     end
 
     context "during a game where the player only guesses right" do
