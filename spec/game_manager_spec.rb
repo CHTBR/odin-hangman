@@ -27,6 +27,11 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
 
         expect(target1).to_not eql(target2)
       end
+
+      xit "sets \"save\" as a global option for player io" do
+        expect(@player_io).to receive(:set_global_option).with("save")
+        subject.start_new_game
+      end
     end
 
     context "during a game where the player only guesses wrong" do
