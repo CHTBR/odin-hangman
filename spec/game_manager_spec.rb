@@ -51,6 +51,25 @@ RSpec.describe GameManager do
     end
 
     context "during any game" do
+      allow(@file_reader).to receive(:list_of_words).and_return(["word"])
+      allow(@player_io).to receive(:get_option).and_return(%w[a b c e f g h i j k])
+
+      xit "removes a letter from the options array every time it's guessed" do
+        allow(@guess_evaluator).to receive(:evaluate_guess).and_return(-1)
+        letters_array = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
+        subject.start_new_game
+        expect(@player).to have_recieved(:get_option).with(letters_array)
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a])
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b])
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c])
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e])
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f])
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g])
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g h])
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g h i])
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g h i j])
+        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g h i j k])
+      end
     end
   end
 end
