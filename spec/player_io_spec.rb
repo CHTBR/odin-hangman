@@ -9,6 +9,11 @@ RSpec.describe PlayerIO do
   end
 
   describe "#get_option" do
+    xit "prints the given message" do
+      $stdin = StringIO.new("options")
+      expect(subject.get_option({ message: "Example message",
+                                  options: %w[example options] })).to output(/Example message/).to_stdout
+    end
   end
 
   describe "#set_global_option" do
