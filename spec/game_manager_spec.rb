@@ -31,9 +31,12 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
 
     context "during a game where the player only guesses wrong" do
       number_of_guesses = 10
-      allow(@file_reader).to receive(:list_of_words).and_return(["word"])
-      allow(@player_io).to receive(:get_option).and_return(%w[a b c e f g h i j k])
-      allow(@guess_evaluator).to receive(:evaluate_guess).and_return(-1)
+
+      before do
+        allow(@file_reader).to receive(:list_of_words).and_return(["word"])
+        allow(@player_io).to receive(:get_option).and_return(%w[a b c e f g h i j k])
+        allow(@guess_evaluator).to receive(:evaluate_guess).and_return(-1)
+      end
 
       xit "requests input from the player exactly 10 times" do
         subject.start_new_game
@@ -70,9 +73,12 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
     context "during a game where the player only guesses right" do # rubocop:disable Metrics/BlockLength
       number_of_guesses = 4
       guesses_array = %w[w o r d]
-      allow(@file_reader).to receive(:list_of_words).and_return(["word"])
-      allow(@player_io).to receive(:get_option).and_return(guesses_array)
-      allow(@guess_evaluator).to receive(:evaluate_guess).and_return([1, 2, 3, 4])
+
+      before do
+        allow(@file_reader).to receive(:list_of_words).and_return(["word"])
+        allow(@player_io).to receive(:get_option).and_return(guesses_array)
+        allow(@guess_evaluator).to receive(:evaluate_guess).and_return([1, 2, 3, 4])
+      end
 
       xit "requests input from the player exactly 4 times" do
         subject.start_new_game
@@ -115,8 +121,11 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
 
     context "during any game" do
       guesses_array = %w[a b c e f g h i j k]
-      allow(@file_reader).to receive(:list_of_words).and_return(["word"])
-      allow(@player_io).to receive(:get_option).and_return(guesses_array)
+      
+      before do
+        allow(@file_reader).to receive(:list_of_words).and_return(["word"])
+        allow(@player_io).to receive(:get_option).and_return(guesses_array)
+      end
 
       xit "removes a letter from the options array every time it's guessed" do
         input_message = "Choose a letter:"
