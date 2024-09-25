@@ -49,6 +49,14 @@ RSpec.describe GameManager do
         expect(@player_io).to receive(:print).with(incorrect_guess_message).exactly(10).times
         subject.start_new_game
       end
+
+      xit "sends a message to the player stating how many guesses they have left" do
+        guesses_left_message = ["You have  ", " guesses left"]
+        10.times do |num|
+          expect(@player_io).to receive(:print).with(guesses_left_message[0] + (10 - num) + guesses_left_message[1])
+        end
+        subject.sart_new_game
+      end
     end
 
     context "during a game where the player only guesses right" do
