@@ -2,7 +2,7 @@ require "rspec"
 require_relative "../lib/guess_evaluator"
 
 RSpec.describe GuessEvaluator do
-  xit "has a accessors for target" do
+  it "has a accessors for target" do
     guess_evaluator = subject
     guess_evaluator.target = "target"
     expect(guess_evaluator.target).to eql("target")
