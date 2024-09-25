@@ -15,12 +15,13 @@ class GameManager
 
   def _game_loop
     guess_options = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
-    10.times do
+    10.times do |num|
       guess = @player_io.get_option({ message: "Choose a letter:",
                                       options: guess_options })
       guess_options -= [guess]
       @guess_evaluator.evaluate_guess(guess)
       @player_io.print("Sadly, your guess was incorrect. Try again.")
+      @player_io.print("You have #{9 - num} guesses left")
     end
   end
 end
