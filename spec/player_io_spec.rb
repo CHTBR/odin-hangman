@@ -26,6 +26,20 @@ RSpec.describe PlayerIO do
       expect(subject.get_option({ message: "Example message",
                                   options: %w[example options] })).to output(/Type one of the options/).to_stdout
     end
+
+    context "when given 5 or less options" do
+      it "prints them in a bullet list" do
+        options = %w[example options are very cool]
+        $stdin = StringIO.new("example")
+        $stdout = StringIO.new
+        subject.get_option({ message: "Example message",
+                             options: options })
+        stdout = $stdout.string
+        options.each do |option|
+          expect(stdout.include?("* " + option)).to eql(true)
+        end
+      end
+    end
   end
 
   describe "#set_global_option" do
