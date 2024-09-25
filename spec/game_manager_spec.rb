@@ -63,8 +63,9 @@ RSpec.describe GameManager do
 
     context "during a game where the player only guesses right" do
       number_of_guesses = 4
+      guesses_array = %w[w o r d]
       allow(@file_reader).to receive(:list_of_words).and_return(["word"])
-      allow(@player_io).to receive(:get_option).and_return(%w[w o r d])
+      allow(@player_io).to receive(:get_option).and_return(guesses_array)
       allow(@guess_evaluator).to receive(:evaluate_guess).and_return([1, 2, 3, 4])
 
       xit "requests input from the player exactly 4 times" do
@@ -80,6 +81,16 @@ RSpec.describe GameManager do
       xit "sends a message to the player stating their guess was correct" do
         incorrect_guess_message = "Yay, you guessed correctly."
         expect(@player_io).to receive(:print).with(incorrect_guess_message).exactly(number_of_guesses).times
+        subject.start_new_game
+      end
+
+      xit "sends a message to the player with the guessed latters filled out in the target word" do
+        blank_guess = "_ _ _ _"
+        expect(@player_io).to receive(:print).with(blank_guess)
+        guesses_array.each do |guess|
+          blank_guess = blank_guess.sub("_", guess)
+          expect(@player_io).to receive(:print).with(blank_guess)
+        end
         subject.start_new_game
       end
     end
