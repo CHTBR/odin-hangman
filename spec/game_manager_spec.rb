@@ -32,11 +32,11 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
 
     context "during any game" do
       it "removes a letter from the options array every time it's guessed" do
-        guesses_array = %w[a b c e f g h i j k]
+        guesses_array = %w[a b c e f g h i j]
         input_message = "Choose a letter:"
         letters_array = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
         allow(@file_reader).to receive(:list_of_words).and_return(["word"])
-        allow(@player_io).to receive(:get_option).and_return("a", "b", "c", "e", "f", "g", "h", "i", "j", "k")
+        allow(@player_io).to receive(:get_option).and_return("a", "b", "c", "e", "f", "g", "h", "i", "j")
 
         expect(@player_io).to receive(:get_option).with({ message: input_message, options: letters_array })
         guesses_array.each do |guess|
@@ -56,7 +56,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
         allow(@guess_evaluator).to receive(:evaluate_guess).and_return(-1)
       end
 
-      xit "requests input from the player exactly 10 times" do
+      it "requests input from the player exactly 10 times" do
         subject.start_new_game
         expect(@player_io).to have_received(:get_option).exactly(number_of_guesses).times
       end
