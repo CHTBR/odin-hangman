@@ -18,7 +18,7 @@ RSpec.describe GuessEvaluator do
       expect(@guess_evaluator.evaluate_guess("x")).to eql(-1)
     end
 
-    xit "returns the position of the letter in an array" do
+    it "returns the position of the letter in an array" do
       expect(@guess_evaluator.evaluate_guess("g")).to eql([3])
     end
 
