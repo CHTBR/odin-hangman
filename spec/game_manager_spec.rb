@@ -43,6 +43,12 @@ RSpec.describe GameManager do
         subject.start_new_game
         expect(@guess_evaluator).to have_recieved(:evaluate_guess).exactly(10).times
       end
+
+      xit "sends a message to the player stating their guess was incorrect" do
+        incorrect_guess_message = "Sadly, your guess was incorrect. Try again."
+        expect(@player_io).to receive(:print).with(incorrect_guess_message).exactly(10).times
+        subject.start_new_game
+      end
     end
 
     context "during a game where the player only guesses right" do
