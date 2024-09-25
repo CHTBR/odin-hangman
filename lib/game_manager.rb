@@ -10,6 +10,7 @@ class GameManager
     list_of_words = @file_reader.list_of_words
     @target = list_of_words.shuffle.shuffle.sample
     @guess_evaluator.target = @target
+    @guess_target = Array.new(@target.size, "_")
     @player_io.set_global_option("save")
     @num_of_wrong_guesses = 0
     @num_of_correct_guesses = 0
@@ -18,7 +19,6 @@ class GameManager
   end
 
   def _game_loop
-
     until _lost? || _won?
       guess = @player_io.get_option({ message: "Choose a letter:",
                                       options: @guess_options })
@@ -32,7 +32,9 @@ class GameManager
       else
         @num_of_correct_guesses += evaluation.size
         @player_io.print("Yay, you guessed correctly.")
+        evaluation.each { |position| @guess_target[position] = guess }
       end
+      @player_io.print(@guess_target.join(" "))
     end
     @player_io.print("Regretably, you didn't manage to win.")
   end
