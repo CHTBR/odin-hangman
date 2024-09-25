@@ -14,7 +14,7 @@ RSpec.describe GuessEvaluator do
       @guess_evaluator.target = "target"
     end
 
-    xit "returns -1 when the letter isn't in the word" do
+    it "returns -1 when the letter isn't in the word" do
       expect(@guess_evaluator.evaluate_guess("x")).to eql(-1)
     end
 
