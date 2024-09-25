@@ -8,21 +8,40 @@ class GameManager
 
   def start_new_game
     list_of_words = @file_reader.list_of_words
-    @guess_evaluator.target = list_of_words.shuffle.shuffle.sample
+    @target = list_of_words.shuffle.shuffle.sample
+    @guess_evaluator.target = @target
     @player_io.set_global_option("save")
+    @num_of_wrong_guesses = 0
+    @num_of_correct_guesses = 0
     _game_loop
   end
 
   def _game_loop
     guess_options = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
-    10.times do |num|
+
+    until _lost? || _won?
       guess = @player_io.get_option({ message: "Choose a letter:",
                                       options: guess_options })
       guess_options -= [guess]
-      @guess_evaluator.evaluate_guess(guess)
+      evaluation = @guess_evaluator.evaluate_guess(guess)
+
+      if evaluation == -1
+        @num_of_wrong_guesses += 1
+      else
+        @num_of_correct_guesses += evaluation.size
+      end
+
       @player_io.print("Sadly, your guess was incorrect. Try again.")
-      @player_io.print("You have #{9 - num} guesses left")
+      @player_io.print("You have #{10 - @num_of_wrong_guesses} guesses left")
     end
     @player_io.print("Regretably, you didn't manage to win.")
+  end
+
+  def _lost?
+    @num_of_wrong_guesses == 10
+  end
+
+  def _won?
+    @num_of_correct_guesses == @target.size
   end
 end
