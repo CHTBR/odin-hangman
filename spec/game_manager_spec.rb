@@ -61,9 +61,9 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
         expect(@player_io).to have_received(:get_option).exactly(number_of_guesses).times
       end
 
-      xit "asks to evaluate player guess exactly 10 times" do
+      it "asks to evaluate player guess exactly 10 times" do
         subject.start_new_game
-        expect(@guess_evaluator).to have_recieved(:evaluate_guess).exactly(number_of_guesses).times
+        expect(@guess_evaluator).to have_received(:evaluate_guess).exactly(number_of_guesses).times
       end
 
       xit "sends a message to the player stating their guess was incorrect" do
