@@ -3,7 +3,7 @@ require_relative "../lib/game_manager"
 
 RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
   describe "#start_new_game" do # rubocop:disable Metrics/BlockLength
-    let(:subject) { GameManager.new({ player_io: @player_io, file_reader: @file_reader, guess_evaluator: @guess_evaluator, save_manager: @gsave_manager }) }
+    let(:subject) { GameManager.new({ player_io: @player_io, file_reader: @file_reader, guess_evaluator: @guess_evaluator, save_manager: @save_manager }) }
     before do
       @player_io = double("PlayerIO", print: nil, get_option: nil, set_global_option: nil)
       @file_reader = double("FileReader", list_of_words: [""])
@@ -154,10 +154,10 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
     end
 
     context "during a game where the player saves" do
-      xit "sends a message to the save manager" do
+      it "sends a message to the save manager" do
         allow(@file_reader).to receive(:list_of_words).and_return(["word"])
-        allow(@player_io).to receive(:get_option).and_return(%w[l o save])
-        allow(@guess_evaluator).to receive(:evaluate_guess).and_return([-1, 2])
+        allow(@player_io).to receive(:get_option).and_return("l", "o", "save")
+        allow(@guess_evaluator).to receive(:evaluate_guess).and_return(-1, [2])
 
         expect(@save_manager).to receive(:save_game)
         subject.start_new_game
