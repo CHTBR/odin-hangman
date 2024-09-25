@@ -134,7 +134,15 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
       end
     end
 
-    context "during a game where the player saves in the 3rd round" do
+    context "during a game where the player saves" do
+      xit "sends a message to the save manager" do
+        allow(@file_reader).to receive(:list_of_words).and_return(["word"])
+        allow(@player_io).to receive(:get_option).and_return(%w[l o save])
+        allow(@guess_evaluator).to receive(:evaluate_guess).and_return([-1, 2])
+
+        expect(@save_manager).to receive(:save_game)
+        subject.start_new_game
+      end
     end
 
     context "during any game" do
