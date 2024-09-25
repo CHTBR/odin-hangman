@@ -15,10 +15,9 @@ class GameManager
 
   def _game_loop
     guess_options = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
-    11.times do
+    10.times do
       guess = @player_io.get_option({ message: "Choose a letter:",
                                       options: guess_options })
-      pp guess
       guess_options -= [guess]
     end
   end
