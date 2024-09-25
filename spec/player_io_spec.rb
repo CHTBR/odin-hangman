@@ -20,6 +20,12 @@ RSpec.describe PlayerIO do
       expect(subject.get_option({ message: "Example message",
                                   options: %w[example options] })).to eql("example")
     end
+
+    xit "prints a warning message when input is incorrect" do
+      $stdin = StringIO.new("wrong\nstill wrong\nexample")
+      expect(subject.get_option({ message: "Example message",
+                                  options: %w[example options] })).to output(/Type one of the options/).to_stdout
+    end
   end
 
   describe "#set_global_option" do
