@@ -114,6 +114,24 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
     end
 
     context "during a 6 round game" do
+      number_of_guesses = 6
+      guesses_array = %w[w l o s r d]
+
+      before do
+        allow(@file_reader).to receive(:list_of_words).and_return(["word"])
+        allow(@player_io).to receive(:get_option).and_return(guesses_array)
+        allow(@guess_evaluator).to receive(:evaluate_guess).and_return([1, -1, 2, -1, 3, 4])
+      end
+
+      xit "requests input from the player exactly 6 times" do
+        subject.start_new_game
+        expect(@player_io).to have_received(:get_option).exactly(number_of_guesses).times
+      end
+
+      xit "asks to evaluate player guess exactly 6 times" do
+        subject.start_new_game
+        expect(@guess_evaluator).to have_recieved(:evaluate_guess).exactly(number_of_guesses).times
+      end
     end
 
     context "during a game where the player saves in the 3rd round" do
@@ -121,7 +139,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
 
     context "during any game" do
       guesses_array = %w[a b c e f g h i j k]
-      
+
       before do
         allow(@file_reader).to receive(:list_of_words).and_return(["word"])
         allow(@player_io).to receive(:get_option).and_return(guesses_array)
