@@ -7,6 +7,6 @@ class GameManager
 
   def start_new_game
     list_of_words = @file_reader.list_of_words
-    @guess_evaluator.target = list_of_words[0]
+    @guess_evaluator.target = list_of_words.shuffle.shuffle.sample
   end
 end
