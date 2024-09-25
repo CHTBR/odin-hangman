@@ -3,6 +3,14 @@ require_relative "../lib/game_manager"
 
 RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
   describe "#start_new_game" do # rubocop:disable Metrics/BlockLength
+    let(:subject) { GameManager.new({ player_io: @player_io, file_reader: @file_reader, guess_evaluator: @guess_evaluator, save_manager: @gsave_manager }) }
+    before do
+      @player_io = double("PlayerIO", print: nil, get_option: nil, set_global_option: nil)
+      @file_reader = double("FileReader", list_of_words: nil)
+      @guess_evaluator = double("GuessEvaluator", :target= => nil, target: nil, evaluate_guess: nil)
+      @save_manager = double("SaveManager", save_game: nil)
+    end
+
     context "before initializing the game loop" do
       xit "tries to get a list of possible words from the file reader" do
         expect(@file_reader).to receive(:list_of_words)
