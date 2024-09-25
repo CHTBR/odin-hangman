@@ -6,7 +6,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
     let(:subject) { GameManager.new({ player_io: @player_io, file_reader: @file_reader, guess_evaluator: @guess_evaluator, save_manager: @gsave_manager }) }
     before do
       @player_io = double("PlayerIO", print: nil, get_option: nil, set_global_option: nil)
-      @file_reader = double("FileReader", list_of_words: [])
+      @file_reader = double("FileReader", list_of_words: [""])
       @guess_evaluator = double("GuessEvaluator", :target= => nil, target: nil, evaluate_guess: [1])
       @save_manager = double("SaveManager", save_game: nil)
     end
