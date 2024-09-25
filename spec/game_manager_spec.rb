@@ -34,7 +34,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
       end
     end
 
-    context "during a game where the player only guesses wrong" do
+    context "during a game where the player only guesses wrong" do # rubocop:disable Metrics/BlockLength
       number_of_guesses = 10
 
       before do
