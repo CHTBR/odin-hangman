@@ -20,6 +20,7 @@ class GameManager
                                       options: guess_options })
       guess_options -= [guess]
       @guess_evaluator.evaluate_guess(guess)
+      @player_io.print("Sadly, your guess was incorrect. Try again.")
     end
   end
 end
