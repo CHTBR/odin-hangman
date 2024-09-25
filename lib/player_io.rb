@@ -12,6 +12,8 @@ class PlayerIO
 
     if options.size <= 5
       options.each { |option| puts "* #{option}" }
+    else
+      puts options.join(", ")
     end
 
     player_input = gets.chomp

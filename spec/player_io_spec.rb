@@ -46,9 +46,9 @@ RSpec.describe PlayerIO do
     end
 
     context "when given more than 5 options" do
-      xit "prints them in a line" do
+      it "prints them in a line" do
         options = %w[example options are very cool indeed]
-        $stdin = StringIO.new("example")
+        allow_any_instance_of(Kernel).to receive(:gets).and_return("example")
         $stdout = StringIO.new
         subject.get_option({ message: "Example message",
                              options: options })
