@@ -14,6 +14,12 @@ RSpec.describe PlayerIO do
       expect(subject.get_option({ message: "Example message",
                                   options: %w[example options] })).to output(/Example message/).to_stdout
     end
+
+    xit "asks for input until it matches one of the options" do
+      $stdin = StringIO.new("wrong\nstill wrong\nexample")
+      expect(subject.get_option({ message: "Example message",
+                                  options: %w[example options] })).to eql("example")
+    end
   end
 
   describe "#set_global_option" do
