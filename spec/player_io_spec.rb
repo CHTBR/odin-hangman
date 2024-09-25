@@ -9,10 +9,12 @@ RSpec.describe PlayerIO do
   end
 
   describe "#get_option" do
-    xit "prints the given message" do
+    it "prints the given message" do
       $stdin = StringIO.new("options")
-      expect(subject.get_option({ message: "Example message",
-                                  options: %w[example options] })).to output(/Example message/).to_stdout
+      expect do
+        subject.get_option({ message: "Example message",
+                             options: %w[example options] })
+      end.to output(/Example message/).to_stdout
     end
 
     xit "asks for input until it matches one of the options" do
