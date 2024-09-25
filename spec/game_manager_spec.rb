@@ -30,6 +30,23 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
       end
     end
 
+    context "during any game" do
+      it "removes a letter from the options array every time it's guessed" do
+        guesses_array = %w[a b c e f g h i j k]
+        input_message = "Choose a letter:"
+        letters_array = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
+        allow(@file_reader).to receive(:list_of_words).and_return(["word"])
+        allow(@player_io).to receive(:get_option).and_return("a", "b", "c", "e", "f", "g", "h", "i", "j", "k")
+
+        expect(@player_io).to receive(:get_option).with({ message: input_message, options: letters_array })
+        guesses_array.each do |guess|
+          letters_array -= [guess]
+          expect(@player_io).to receive(:get_option).with({ message: input_message, options: letters_array })
+        end
+        subject.start_new_game
+      end
+    end
+
     context "during a game where the player only guesses wrong" do # rubocop:disable Metrics/BlockLength
       number_of_guesses = 10
 
@@ -143,27 +160,6 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
 
         expect(@save_manager).to receive(:save_game)
         subject.start_new_game
-      end
-    end
-
-    context "during any game" do
-      guesses_array = %w[a b c e f g h i j k]
-
-      before do
-        allow(@file_reader).to receive(:list_of_words).and_return(["word"])
-        allow(@player_io).to receive(:get_option).and_return(guesses_array)
-      end
-
-      xit "removes a letter from the options array every time it's guessed" do
-        input_message = "Choose a letter:"
-        allow(@guess_evaluator).to receive(:evaluate_guess).and_return(-1)
-        letters_array = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
-        subject.start_new_game
-        expect(@player).to have_recieved(:get_option).with({ message: input_message, options: letters_array })
-        guesses_array.each do |guess|
-          letters_array -= [guess]
-          expect(@player).to have_recieved(:get_option).with({ message: input_message, options: letters_array })
-        end
       end
     end
   end
