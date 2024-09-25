@@ -1,8 +1,8 @@
 require "rspec"
 require_relative "../lib/game_manager"
 
-RSpec.describe GameManager do
-  describe "#start_new_game" do
+RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
+  describe "#start_new_game" do # rubocop:disable Metrics/BlockLength
     context "before initializing the game loop" do
       xit "tries to get a list of possible words from the file reader" do
         expect(@file_reader).to receive(:list_of_words)
@@ -61,7 +61,7 @@ RSpec.describe GameManager do
       end
     end
 
-    context "during a game where the player only guesses right" do
+    context "during a game where the player only guesses right" do # rubocop:disable Metrics/BlockLength
       number_of_guesses = 4
       guesses_array = %w[w o r d]
       allow(@file_reader).to receive(:list_of_words).and_return(["word"])
