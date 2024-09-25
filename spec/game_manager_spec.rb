@@ -60,6 +60,14 @@ RSpec.describe GameManager do
     end
 
     context "during a game where the player only guesses right" do
+      allow(@file_reader).to receive(:list_of_words).and_return(["word"])
+      allow(@player_io).to receive(:get_option).and_return(%w[w o r d])
+      allow(@guess_evaluator).to receive(:evaluate_guess).and_return([1, 2, 3, 4])
+
+      xit "requests input from the player exactly 4 times" do
+        subject.start_new_game
+        expect(@player_io).to have_received(:get_option).exactly(4).times
+      end
     end
 
     context "during a 6 round game" do
