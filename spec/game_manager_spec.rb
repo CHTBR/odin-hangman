@@ -37,6 +37,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
         letters_array = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
         allow(@file_reader).to receive(:list_of_words).and_return(["word"])
         allow(@player_io).to receive(:get_option).and_return("a", "b", "c", "e", "f", "g", "h", "i", "j")
+        allow(@guess_evaluator).to receive(:evaluate_guess).and_return(-1)
 
         expect(@player_io).to receive(:get_option).with({ message: input_message, options: letters_array })
         guesses_array.each do |guess|
