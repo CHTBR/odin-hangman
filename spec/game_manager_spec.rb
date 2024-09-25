@@ -164,4 +164,12 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
       end
     end
   end
+
+  describe "#to_json" do
+
+  end
+
+  describe "#parse_json" do
+
+  end
 end
