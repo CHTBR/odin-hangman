@@ -41,7 +41,7 @@ RSpec.describe GameManager do
 
       xit "asks to evaluate player guess exactly 10 times" do
         subject.start_new_game
-      expect(@guess_evaluator).to have_recieved(:evaluate_guess).exactly(10).times
+        expect(@guess_evaluator).to have_recieved(:evaluate_guess).exactly(10).times
       end
     end
 
@@ -55,24 +55,19 @@ RSpec.describe GameManager do
     end
 
     context "during any game" do
+      guesses_array = %w[a b c e f g h i j k]
       allow(@file_reader).to receive(:list_of_words).and_return(["word"])
-      allow(@player_io).to receive(:get_option).and_return(%w[a b c e f g h i j k])
+      allow(@player_io).to receive(:get_option).and_return(guesses_array)
 
       xit "removes a letter from the options array every time it's guessed" do
         allow(@guess_evaluator).to receive(:evaluate_guess).and_return(-1)
         letters_array = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
         subject.start_new_game
         expect(@player).to have_recieved(:get_option).with(letters_array)
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a])
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b])
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c])
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e])
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f])
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g])
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g h])
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g h i])
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g h i j])
-        expect(@player).to have_recieved(:get_option).with(letters_array - %w[a b c e f g h i j k])
+        guesses_array.each do |guess|
+          letters_array -= [guess]
+          expect(@player).to have_recieved(:get_option).with(letters_array)
+        end
       end
     end
   end
