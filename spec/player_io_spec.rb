@@ -23,10 +23,12 @@ RSpec.describe PlayerIO do
                                   options: %w[example options] })).to eql("example")
     end
 
-    xit "prints a warning message when input is incorrect" do
-      $stdin = StringIO.new("wrong\nstill wrong\nexample")
-      expect(subject.get_option({ message: "Example message",
-                                  options: %w[example options] })).to output(/Type one of the options/).to_stdout
+    it "prints a warning message when input is incorrect" do
+      allow_any_instance_of(Kernel).to receive(:gets).and_return("wrong", "still wrong", "example")
+      expect do
+        subject.get_option({ message: "Example message",
+                             options: %w[example options] })
+      end.to output(/Type one of the options/).to_stdout
     end
 
     context "when given 5 or less options" do

@@ -12,6 +12,7 @@ class PlayerIO
 
     player_input = gets.chomp
     until options.include?(player_input)
+      puts "Type one of the options"
       player_input = gets.chomp
     end
     player_input
