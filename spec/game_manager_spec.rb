@@ -7,7 +7,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
     before do
       @player_io = double("PlayerIO", print: nil, get_option: nil, set_global_option: nil)
       @file_reader = double("FileReader", list_of_words: [])
-      @guess_evaluator = double("GuessEvaluator", :target= => nil, target: nil, evaluate_guess: nil)
+      @guess_evaluator = double("GuessEvaluator", :target= => nil, target: nil, evaluate_guess: [1])
       @save_manager = double("SaveManager", save_game: nil)
     end
 
@@ -98,7 +98,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
         allow(@guess_evaluator).to receive(:evaluate_guess).and_return([1, 2, 3, 4])
       end
 
-      xit "requests input from the player exactly 4 times" do
+      it "requests input from the player exactly 4 times" do
         subject.start_new_game
         expect(@player_io).to have_received(:get_option).exactly(number_of_guesses).times
       end
