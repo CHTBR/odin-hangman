@@ -10,15 +10,15 @@ RSpec.describe PlayerIO do
 
   describe "#get_option" do
     it "prints the given message" do
-      $stdin = StringIO.new("options")
+      allow_any_instance_of(Kernel).to receive(:gets).and_return("example")
       expect do
         subject.get_option({ message: "Example message",
                              options: %w[example options] })
       end.to output(/Example message/).to_stdout
     end
 
-    xit "asks for input until it matches one of the options" do
-      $stdin = StringIO.new("wrong\nstill wrong\nexample")
+    it "asks for input until it matches one of the options" do
+      allow_any_instance_of(Kernel).to receive(:gets).and_return("wrong", "still wrong", "example")
       expect(subject.get_option({ message: "Example message",
                                   options: %w[example options] })).to eql("example")
     end
