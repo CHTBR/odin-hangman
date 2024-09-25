@@ -6,7 +6,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
     let(:subject) { GameManager.new({ player_io: @player_io, file_reader: @file_reader, guess_evaluator: @guess_evaluator, save_manager: @gsave_manager }) }
     before do
       @player_io = double("PlayerIO", print: nil, get_option: nil, set_global_option: nil)
-      @file_reader = double("FileReader", list_of_words: nil)
+      @file_reader = double("FileReader", list_of_words: [])
       @guess_evaluator = double("GuessEvaluator", :target= => nil, target: nil, evaluate_guess: nil)
       @save_manager = double("SaveManager", save_game: nil)
     end
@@ -17,7 +17,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
         subject.start_new_game
       end
 
-      xit "selects a word from the list and gives it to the guess evaluator" do
+      it "selects a word from the list and gives it to the guess evaluator" do
         word_list = %w[this is a list of random words]
         allow(@file_reader).to receive(:list_of_words).and_return(word_list)
         expect(@guess_evaluator).to receive(:target=)
