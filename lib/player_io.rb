@@ -10,6 +10,10 @@ class PlayerIO
 
     puts message
 
+    if options.size <= 5
+      options.each { |option| puts "* #{option}" }
+    end
+
     player_input = gets.chomp
     until options.include?(player_input)
       puts "Type one of the options"

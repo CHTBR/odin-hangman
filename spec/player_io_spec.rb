@@ -32,9 +32,9 @@ RSpec.describe PlayerIO do
     end
 
     context "when given 5 or less options" do
-      xit "prints them in a bullet list" do
+      it "prints them in a bullet list" do
         options = %w[example options are very cool]
-        $stdin = StringIO.new("example")
+        allow_any_instance_of(Kernel).to receive(:gets).and_return("example")
         $stdout = StringIO.new
         subject.get_option({ message: "Example message",
                              options: options })
