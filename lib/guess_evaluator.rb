@@ -4,7 +4,13 @@ class GuessEvaluator
 
   def evaluate_guess(guess)
     if target.include?(guess)
-      [target.index(guess)]
+      pos_arr = []
+      target_tmp = target
+      while target_tmp.include?(guess)
+        pos_arr << target_tmp.index(guess)
+        target_tmp[target_tmp.index(guess)] = "0"
+      end
+      pos_arr
     else
       -1
     end

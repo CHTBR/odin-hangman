@@ -22,7 +22,7 @@ RSpec.describe GuessEvaluator do
       expect(@guess_evaluator.evaluate_guess("g")).to eql([3])
     end
 
-    xit "returns multiple positions in the array if the letter appears multiple times" do
+    it "returns multiple positions in the array if the letter appears multiple times" do
       expect(@guess_evaluator.evaluate_guess("t")).to eql([0, 5])
     end
   end
