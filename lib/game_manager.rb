@@ -4,6 +4,7 @@ class GameManager
     @file_reader = args[:file_reader]
     @guess_evaluator = args[:guess_evaluator]
     @player_io = args[:player_io]
+    @save_manager = args[:save_manager]
   end
 
   def start_new_game
@@ -22,6 +23,10 @@ class GameManager
     until _lost? || _won?
       guess = @player_io.get_option({ message: "Choose a letter:",
                                       options: @guess_options })
+      if guess == "save"
+        @save_manager.save_game(self)
+        return
+      end
       @guess_options -= [guess]
       evaluation = @guess_evaluator.evaluate_guess(guess)
 
