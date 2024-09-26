@@ -19,7 +19,7 @@ RSpec.describe SaveLoadManager do
     it "reads from save file and creates a new object" do
       game_manager_double = GameManagerDouble.new
       file_double = StringIO.new(game_manager_double.json_representation)
-      allow(File).to receive(:read).with("assets/save.json").and_yield(file_double)
+      allow(File).to receive(:read).with("assets/save.json").and_return(file_double.string)
       expect { subject.load_game(game_manager_double) }.to output("initialized variables with target, t _ r _ _ t, 1, 3, a b c d e f g h i j k l m n p q s u v w x y z").to_stdout
     end
   end
