@@ -11,13 +11,8 @@ class GameManager
 
   def start_new_game
     list_of_words = @file_reader.list_of_words
-    @target = list_of_words.shuffle.shuffle.sample
-    @guess_evaluator.target = @target
-    @guess_target = Array.new(@target.size, "_")
-    @player_io.add_global_option("save")
-    @num_of_wrong_guesses = 0
-    @num_of_correct_guesses = 0
-    @guess_options = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
+    target = list_of_words.shuffle.shuffle.sample
+    _initialize_variables({ "target" => target })
     _game_loop
   end
 
@@ -71,5 +66,20 @@ class GameManager
 
   def to_json(*options)
     as_json(*options).to_json(*options)
+  end
+
+  def parse_json(json)
+    main_variables = JSON.parse(json)
+    _initialize_variables(main_variables)
+  end
+
+  def _initialize_variables(args)
+    @target = args["target"]
+    @guess_evaluator.target = @target
+    @guess_target = args.fetch("guess_target", Array.new(@target.size, "_"))
+    @num_of_wrong_guesses = args.fetch("num_of_wrong_guesses", 0)
+    @num_of_correct_guesses = args.fetch("num_of_correct_guesses", 0)
+    @guess_options = args.fetch("guess_options", %w[a b c d e f g h i j k l m n o p q r s t u v w x y z])
+    @player_io.add_global_option("save")
   end
 end
