@@ -1,3 +1,5 @@
+require_relative "../lib/game_manager"
+
 # role class for converting to json
 class GameManagerDouble < GameManager
   attr_reader :json_representation
