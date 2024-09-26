@@ -17,7 +17,7 @@ class MainMenu
     when "Start a new game"
       @game_manager.start_new_game
     when "Load from save"
-      @load_manager.load_game
+      @load_manager.load_game(@game_manager)
     end
   end
 end

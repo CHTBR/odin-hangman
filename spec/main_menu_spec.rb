@@ -45,7 +45,7 @@ RSpec.describe MainMenu do
       context "if they want to load a game from save" do
         it "sends a load_game message to the load_manager" do
           allow(@player_io).to receive(:get_option).and_return("Load from save")
-          expect(@load_manager).to receive(:load_game)
+          expect(@load_manager).to receive(:load_game).with(@game_manager)
           subject.open_main_menu
         end
       end
