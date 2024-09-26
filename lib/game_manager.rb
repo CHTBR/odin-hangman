@@ -1,3 +1,5 @@
+require "json"
+
 # A class to manage message calls and variables during a single game of hangman
 class GameManager
   def initialize(args)
@@ -12,7 +14,7 @@ class GameManager
     @target = list_of_words.shuffle.shuffle.sample
     @guess_evaluator.target = @target
     @guess_target = Array.new(@target.size, "_")
-    @player_io.set_global_option("save")
+    @player_io.add_global_option("save")
     @num_of_wrong_guesses = 0
     @num_of_correct_guesses = 0
     @guess_options = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
@@ -55,5 +57,19 @@ class GameManager
 
   def _won?
     @num_of_correct_guesses == @target.size
+  end
+
+  def as_json(options = {})
+    {
+      "target" => @target,
+      "guess_target" => @guess_target,
+      "num_of_wrong_guesses" => @num_of_wrong_guesses,
+      "num_of_correct_guesses" => @num_of_correct_guesses,
+      "guess_options" => @guess_options
+    }
+  end
+
+  def to_json(*options)
+    as_json(*options).to_json(*options)
   end
 end
