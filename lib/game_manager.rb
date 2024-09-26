@@ -13,7 +13,6 @@ class GameManager
     list_of_words = @file_reader.list_of_words
     target = list_of_words.shuffle.shuffle.sample
     _initialize_variables({ "target" => target })
-    _game_loop
   end
 
   def _game_loop
@@ -81,5 +80,6 @@ class GameManager
     @num_of_correct_guesses = args.fetch("num_of_correct_guesses", 0)
     @guess_options = args.fetch("guess_options", %w[a b c d e f g h i j k l m n o p q r s t u v w x y z])
     @player_io.add_global_option("save")
+    _game_loop
   end
 end

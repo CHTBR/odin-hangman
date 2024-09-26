@@ -180,7 +180,7 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
     it "runs the initialize_variables method with arguments from json" do
       game_manager = GameManagerDouble.new
       json = game_manager.json_representation
-      expect(game_manager.parse_json(json)).to eql("initialized variables with target, t _ r _ _ t, 1, 3, a b c d e f g h i j k l m n p q s u v w x y z")
+      expect { game_manager.parse_json(json) }.to output("initialized variables with target, t _ r _ _ t, 1, 3, a b c d e f g h i j k l m n p q s u v w x y z").to_stdout
     end
   end
 end

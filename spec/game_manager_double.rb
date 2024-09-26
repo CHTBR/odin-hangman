@@ -14,6 +14,6 @@ class GameManagerDouble < GameManager
   end
 
   def _initialize_variables(args)
-    "initialized variables with #{args["target"]}, #{args["guess_target"].join(' ')}, #{args["num_of_wrong_guesses"]}, #{args["num_of_correct_guesses"]}, #{args["guess_options"].join(' ')}"
+    print "initialized variables with #{args["target"]}, #{args["guess_target"].join(' ')}, #{args["num_of_wrong_guesses"]}, #{args["num_of_correct_guesses"]}, #{args["guess_options"].join(' ')}"
   end
 end
