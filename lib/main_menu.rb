@@ -8,16 +8,22 @@ class MainMenu
 
   def open_main_menu
     @player_io.print("Welcome to hangman")
-    player_action = @player_io.get_option({ message: "What would you like to do?",
-                                            options: ["Help", "Start a new game", "Load from save"] })
 
-    case player_action
-    when "Help"
-      @player_io.print("example string")
-    when "Start a new game"
-      @game_manager.start_new_game
-    when "Load from save"
-      @load_manager.load_game(@game_manager)
+    loop do
+      player_action = @player_io.get_option({ message: "What would you like to do?",
+                                              options: ["Help", "Start a new game", "Load from save", "Exit"] })
+
+      case player_action
+      when "Help"
+        @player_io.print("example string")
+      when "Start a new game"
+        @game_manager.start_new_game
+      when "Load from save"
+        @load_manager.load_game(@game_manager)
+      when "Exit"
+        puts(player_action)
+        return
+      end
     end
   end
 end
