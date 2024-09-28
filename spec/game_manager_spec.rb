@@ -35,6 +35,12 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
     end
 
     context "during any game" do
+      it "prints the guess target at the beginning of every game loop" do
+        allow(@file_reader).to receive(:list_of_words).and_return(["word"])
+        expect(@player_io).to receive(:print).with("The guess target is: _ _ _ _")
+        subject.start_new_game
+      end
+
       it "removes a letter from the options array every time it's guessed" do
         guesses_array = %w[a b c e f g h i j]
         input_message = "Choose a letter:"
