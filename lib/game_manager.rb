@@ -12,6 +12,7 @@ class GameManager
   def start_new_game
     list_of_words = @file_reader.list_of_words
     target = list_of_words.shuffle.shuffle.sample
+    @full_target = String.new(target)
     _initialize_variables({ "target" => target })
   end
 
@@ -41,7 +42,7 @@ class GameManager
 
     if _lost?
       @player_io.print("Regretably, you didn't manage to win.")
-      @player_io.print("The correct word was: " + @guess_evaluator.target)
+      @player_io.print("The correct word was: " + @full_target)
     else
       @player_io.print("Congratulations, you won!")
     end
