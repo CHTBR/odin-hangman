@@ -16,6 +16,7 @@ class GameManager
   end
 
   def _game_loop
+    @player_io.print("The guess target is: " + @guess_target.join(" "))
     until _lost? || _won?
       guess = @player_io.get_option({ message: "Choose a letter:",
                                       options: @guess_options })
@@ -40,6 +41,7 @@ class GameManager
 
     if _lost?
       @player_io.print("Regretably, you didn't manage to win.")
+      @player_io.print("The correct word was: " + @guess_evaluator.target)
     else
       @player_io.print("Congratulations, you won!")
     end
