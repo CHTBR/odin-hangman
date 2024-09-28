@@ -10,7 +10,7 @@ class PlayerIO
 
   def get_option(args)
     message = args[:message] || "Choose one of the options:"
-    options = args[:options] + @global_options
+    options = args[:options]
 
     puts message
 
@@ -20,6 +20,7 @@ class PlayerIO
       puts options.join(", ")
     end
 
+    options = options + @global_options
     player_input = gets.chomp
     until options.include?(player_input)
       puts "Type one of the options"
