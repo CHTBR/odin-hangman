@@ -91,6 +91,12 @@ RSpec.describe GameManager do # rubocop:disable Metrics/BlockLength
         expect(@player_io).to receive(:print).with(losing_message)
         subject.start_new_game
       end
+
+      it "sends a message with the correct word" do
+        correct_word_message = "The correct word was: word"
+        expect(@player_io).to receive(:print).with(correct_word_message)
+        subject.start_new_game
+      end
     end
 
     context "during a game where the player only guesses right" do # rubocop:disable Metrics/BlockLength
