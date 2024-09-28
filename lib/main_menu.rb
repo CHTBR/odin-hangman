@@ -21,7 +21,6 @@ class MainMenu
       when "Load from save"
         @load_manager.load_game(@game_manager)
       when "Exit"
-        puts(player_action)
         return
       end
     end
